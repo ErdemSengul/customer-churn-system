@@ -1,0 +1,26 @@
+# PostgreSQL veritabanını tek komutla açar:  docker compose up -d
+# Kapatmak için:                               docker compose down
+# Verileri de tamamen silmek için:             docker compose down -v
+# Ayarlar .env dosyasından okunur (.env.example'a bakın).
+services:
+  db:
+    image: postgres:16
+    container_name: churn-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-churn}
+      POSTGRES_USER: ${POSTGRES_USER:-churn}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-churn}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - churn_pgdata:/var/lib/postgresql/data                       # veriler burada kalıcı durur
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro # ilk açılışta tabloları kurar
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-churn} -d ${POSTGRES_DB:-churn}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  churn_pgdata:
