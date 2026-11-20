@@ -1,0 +1,25 @@
+artifact_path: "file:C:/Users/muham/OneDrive/Masa\xFCst\xFC/customer-churn-system/mlruns/1/models/m-ad7a979ea90f4712b50da1d0ab452b5c/artifacts"
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.16
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: pickle
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - numpy.dtype
+    - sklearn.tree._tree.Tree
+mlflow_version: 3.18.0
+model_id: m-ad7a979ea90f4712b50da1d0ab452b5c
+model_size_bytes: 626879
+model_uuid: m-ad7a979ea90f4712b50da1d0ab452b5c
+prompts: null
+run_id: 08757267012e40168c2bd7584f104748
+utc_time_created: '2026-11-20 14:54:55.115852'
