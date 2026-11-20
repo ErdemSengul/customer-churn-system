@@ -1,0 +1,6 @@
+model,cv_accuracy,cv_precision,cv_recall,cv_f1,cv_roc_auc,cv_pr_auc,opt_threshold,test_accuracy,test_precision,test_recall,test_f1_default50,test_f1_opt,test_roc_auc,test_pr_auc
+XGBoost_Standard,0.7785,0.5915,0.3729,0.4574,0.7985,0.5568,0.2434,0.693,0.4323,0.7206,0.4268,0.5404,0.7805,0.5167
+LogisticRegression_Baseline,0.7106,0.4532,0.7549,0.5663,0.8025,0.556,0.5427,0.714,0.4518,0.6647,0.5416,0.538,0.7821,0.5247
+RandomForest_Baseline,0.7234,0.4652,0.7024,0.5597,0.7996,0.5549,0.54,0.728,0.4671,0.6088,0.5424,0.5286,0.7796,0.5251
+XGBoost_Balanced,0.7391,0.4843,0.652,0.5557,0.7962,0.5507,0.4295,0.683,0.4211,0.7086,0.5343,0.5283,0.7763,0.523
+Dummy_Baseline,0.7496,0.0,0.0,0.0,0.5,0.2504,0.5,0.7495,0.0,0.0,0.0,0.0,0.5,0.2505
