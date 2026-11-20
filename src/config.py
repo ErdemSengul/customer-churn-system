@@ -1,24 +1,29 @@
 """
-Proje genelinde kullanılan klasör yolları ve veritabanı bağlantı ayarları.
-
-Veritabanı ayarları proje kökündeki .env dosyasından okunur
-(.env.example dosyasını kopyalayıp .env adıyla kaydedin).
-.env yoksa aşağıdaki varsayılanlar kullanılır; bunlar docker-compose.yml ile uyumludur.
+Proje genelinde kullanılan klasör yolları, sabitler ve veritabanı bağlantı ayarları.
 """
 import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+SEED = 42
 
-# --- Klasörler ---
+# --- Klasörler ve Dosya Yolları ---
 DATA_DIR = ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
-RAW_CSV = RAW_DIR / "customers.csv"          # birleşik ham veri seti (CSV kopyası)
-SQL_DIR = ROOT / "sql"
-SCHEMA_SQL = SQL_DIR / "schema.sql"          # tablolar + churn_dataset görünümü
-CHECKS_SQL = SQL_DIR / "quality_checks.sql"  # veri kalite kontrolleri
+PROCESSED_DIR = DATA_DIR / "processed"
+MODELS_DIR = ROOT / "models"
 
-# --- .env dosyasını oku (python-dotenv kuruluysa) ---
+RAW_CSV = RAW_DIR / "customers.csv"
+FEATURES_CSV = PROCESSED_DIR / "customers_features.csv"
+BEST_MODEL_PATH = MODELS_DIR / "best_churn_pipeline.joblib"
+METRICS_CSV_PATH = PROCESSED_DIR / "cv_model_comparison.csv"
+MLFLOW_DB_URI = f"sqlite:///{(ROOT / 'mlflow.db').as_posix()}"
+
+SQL_DIR = ROOT / "sql"
+SCHEMA_SQL = SQL_DIR / "schema.sql"
+CHECKS_SQL = SQL_DIR / "quality_checks.sql"
+
+# --- .env dosyasını oku ---
 try:
     from dotenv import load_dotenv
 
@@ -35,5 +40,4 @@ DB_CONFIG = {
     "password": os.getenv("POSTGRES_PASSWORD", "churn"),
 }
 
-# Ekibin okuyacağı birleşik tablo (görünüm) adı
 DATASET_VIEW = "churn_dataset"
